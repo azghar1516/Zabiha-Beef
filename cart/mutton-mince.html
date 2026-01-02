@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mutton Mince | Zabiha Beef</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, Arial;
+  background:#f5f5f5;
+}
+header{
+  background:#fff;
+  padding:15px;
+  text-align:center;
+  border-bottom:2px solid #b10f0f;
+}
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  color:#b10f0f;
+}
+.container{
+  max-width:420px;
+  margin:20px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+h2{
+  margin:0;
+  color:#b10f0f;
+}
+.item-image{
+  width:100%;
+  height:220px;
+  border:2px solid #b10f0f;
+  margin:15px 0;
+  padding:10px;
+  background:#fff;
+  object-fit:contain;
+}
+button{
+  width:100%;
+  padding:15px;
+  background:#b10f0f;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{
+  background:#8e0c0c;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+}
+.price-input{
+  font-size:18px;
+  font-weight:bold;
+}
+.admin-note{
+  font-size:13px;
+  color:#b10f0f;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Zabiha Beef</div>
+</header>
+
+<div class="container">
+
+<h2 id="itemName">Mutton Mince</h2>
+
+<img id="itemImage" class="item-image">
+
+<p>
+<b>Price:</b> Rs
+<input id="priceInput" class="price-input" type="number" readonly>
+/ kg
+</p>
+
+<small id="adminNote" class="admin-note" style="display:none;">
+(Admin can edit price)
+</small>
+
+<label>Quantity (kg)</label>
+<input type="number" id="qty" value="1" min="1">
+
+<h3>Total: Rs <span id="total">0</span></h3>
+
+<button onclick="orderNow()">Order on WhatsApp</button>
+
+<p style="text-align:center;margin-top:10px;">
+📞 0307-4999091
+</p>
+
+</div>
+
+<script>
+/* ITEM CONFIG */
+const itemKey = "mutton-mince";   // images/mutton-mince.jpg
+const displayName = "Mutton Mince";
+const defaultPrice = 1200;
+
+/* ELEMENTS */
+const img = document.getElementById("itemImage");
+const nameTag = document.getElementById("itemName");
+const priceInput = document.getElementById("priceInput");
+const totalTag = document.getElementById("total");
+const qty = document.getElementById("qty");
+const adminNote = document.getElementById("adminNote");
+
+/* LOAD */
+img.src = "../images/" + itemKey + ".jpg";
+nameTag.innerText = displayName;
+
+/* LOAD PRICE */
+let savedPrice = localStorage.getItem("price_" + itemKey);
+let currentPrice = savedPrice ? Number(savedPrice) : defaultPrice;
+
+priceInput.value = currentPrice;
+totalTag.innerText = currentPrice;
+
+/* ADMIN MODE */
+if(localStorage.getItem("isAdmin") === "yes"){
+  priceInput.removeAttribute("readonly");
+  adminNote.style.display = "block";
+
+  priceInput.addEventListener("input", () => {
+    localStorage.setItem("price_" + itemKey, priceInput.value);
+    updateTotal();
+  });
+}
+
+/* TOTAL */
+function updateTotal(){
+  totalTag.innerText = qty.value * priceInput.value;
+}
+qty.addEventListener("input", updateTotal);
+
+/* WHATSAPP */
+function orderNow(){
+  let msg =
+    "Zabiha Beef Order%0A" +
+    "Item: " + displayName + "%0A" +
+    "Qty: " + qty.value + " kg%0A" +
+    "Price: Rs " + priceInput.value + " / kg%0A" +
+    "Total: Rs " + (qty.value * priceInput.value);
+
+  window.open("https://wa.me/923074999091?text=" + msg);
+}
+</script>
+
+</body>
+</html>
