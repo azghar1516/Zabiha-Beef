@@ -18,13 +18,15 @@
 <h2>Login / Register</h2>
 
 <label>Email</label>
-<input type="email" placeholder="Enter email"
+<input type="email" id="email"
+placeholder="Enter email"
 style="width:100%;padding:12px;margin:8px 0;">
 
 <p style="text-align:center;">OR</p>
 
 <label>Phone Number</label>
-<input type="tel" placeholder="03xxxxxxxxx"
+<input type="tel" id="phone"
+placeholder="03xxxxxxxxx"
 style="width:100%;padding:12px;margin:8px 0;">
 
 <br><br>
@@ -45,9 +47,22 @@ Continue
 
 <script>
 function login(){
-  window.location.href="index.html";
+
+  const email = document.getElementById("email").value.trim();
+
+  // ADMIN CHECK
+  if(email === "shazghar68@gmail.com"){
+    localStorage.setItem("isAdmin", "yes");
+  } else {
+    localStorage.setItem("isAdmin", "no");
+  }
+
+  // LOGIN FLAG
+  localStorage.setItem("loggedIn", "yes");
+
+  // GO TO HOME
+  window.location.href = "index.html";
 }
 </script>
 
-</body>
-</html>
+</bod
