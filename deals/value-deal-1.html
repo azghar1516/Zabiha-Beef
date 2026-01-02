@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Value Deal | Zabiha Beef</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, Arial;
+  background:#f5f5f5;
+}
+header{
+  background:#b10f0f;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+}
+.container{
+  max-width:420px;
+  margin:20px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+h2{
+  margin:0;
+  color:#b10f0f;
+}
+.price-input{
+  font-size:18px;
+  font-weight:bold;
+}
+.admin-note{
+  font-size:12px;
+  color:#b10f0f;
+  display:none;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+}
+button{
+  width:100%;
+  padding:15px;
+  background:#b10f0f;
+  color:#fff;
+  border:none;
+  font-size:16px;
+}
+button:hover{
+  background:#8e0c0c;
+}
+</style>
+</head>
+
+<body>
+
+<header>Zabiha Beef</header>
+
+<div class="container">
+
+<h2 id="dealName"></h2>
+
+<p>
+<b>Deal Price:</b> Rs
+<input id="priceInput" class="price-input" type="number" readonly>
+</p>
+
+<div id="adminNote" class="admin-note">
+(Admin can change deal price)
+</div>
+
+<label>Quantity</label>
+<input type="number" id="qty" value="1" min="1">
+
+<h3>Total: Rs <span id="total"></span></h3>
+
+<button onclick="orderNow()">Order on WhatsApp</button>
+
+<p style="text-align:center;margin-top:10px;">
+📞 0307-4999091
+</p>
+
+</div>
+
+<script>
+/* CONFIG */
+const dealKey = "value-deal-1";
+const dealName = "Value Deal – Beef + Chicken Combo";
+const defaultPrice = 4800;
+
+/* ELEMENTS */
+const dealTitle = document.getElementById("dealName");
+const priceInput = document.getElementById("priceInput");
+const qty = document.getElementById("qty");
+const total = document.getElementById("total");
+const adminNote = document.getElementById("adminNote");
+
+/* LOAD */
+dealTitle.innerText = dealName;
+
+let savedPrice = localStorage.getItem("price_" + dealKey);
+let currentPrice = savedPrice ? Number(savedPrice) : defaultPrice;
+
+priceInput.value = currentPrice;
+total.innerText = currentPrice;
+
+/* ADMIN MODE */
+if(localStorage.getItem("isAdmin") === "yes"){
+  priceInput.removeAttribute("readonly");
+  adminNote.style.display = "block";
+
+  priceInput.addEventListener("input", () => {
+    localStorage.setItem("price_" + dealKey, priceInput.value);
+    updateTotal();
+  });
+}
+
+/* TOTAL */
+function updateTotal(){
+  total.innerText = qty.value * priceInput.value;
+}
+qty.addEventListener("input", updateTotal);
+
+/* WHATSAPP */
+function orderNow(){
+  let msg =
+    "Zabiha Beef Value Deal Order%0A" +
+    "Deal: " + dealName + "%0A" +
+    "Qty: " + qty.value + "%0A" +
+    "Price: Rs " + priceInput.value + "%0A" +
+    "Total: Rs " + (qty.value * priceInput.value);
+
+  window.open("https://wa.me/923074999091?text=" + msg);
+}
+</script>
+
+</body>
+</html>
