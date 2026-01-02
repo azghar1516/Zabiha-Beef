@@ -1,68 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Login | Zabiha Beef</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, Arial;
+  background:#f5f5f5;
+}
+header{
+  background:#b10f0f;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
+}
+.container{
+  max-width:420px;
+  margin:30px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+}
+button{
+  width:100%;
+  padding:15px;
+  background:#b10f0f;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">Zabiha Beef</div>
-</header>
+<header>Zabiha Beef</header>
 
 <div class="container">
 
-<h2>Login / Register</h2>
+<h2>Login</h2>
 
 <label>Email</label>
-<input type="email" id="email"
-placeholder="Enter email"
-style="width:100%;padding:12px;margin:8px 0;">
+<input type="email" id="email" placeholder="Enter email">
 
 <p style="text-align:center;">OR</p>
 
 <label>Phone Number</label>
-<input type="tel" id="phone"
-placeholder="03xxxxxxxxx"
-style="width:100%;padding:12px;margin:8px 0;">
+<input type="tel" id="phone" placeholder="03xxxxxxxxx">
 
 <br><br>
 
-<button onclick="login()"
-style="
-width:100%;
-padding:15px;
-background:#b10f0f;
-color:white;
-border:none;
-font-size:16px;
-">
-Continue
-</button>
+<button onclick="login()">Continue</button>
 
 </div>
 
 <script>
+/* ================= ADMIN EMAILS ================= */
+const ADMINS = [
+  "shazghar68@gmail.com",
+  "jawad.hanif@zabihabeef.com",
+  "hassan.shamim@zabihabeef.com",
+  "muntazer.mehdi@zabihabeef.com"
+];
+
 function login(){
 
-  const email = document.getElementById("email").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const phone = document.getElementById("phone").value.trim();
 
-  // ADMIN CHECK
-  if(email === "shazghar68@gmail.com"){
-    localStorage.setItem("isAdmin", "yes");
-  } else {
-    localStorage.setItem("isAdmin", "no");
+  if(!email && !phone){
+    alert("Please enter email or phone");
+    return;
   }
 
-  // LOGIN FLAG
-  localStorage.setItem("loggedIn", "yes");
+  /* LOGIN FLAG */
+  localStorage.setItem("loggedIn","yes");
 
-  // GO TO HOME
-  window.location.href = "index.html";
+  /* ADMIN CHECK */
+  if(email && ADMINS.includes(email)){
+    localStorage.setItem("isAdmin","yes");
+    localStorage.setItem("adminEmail", email);
+    window.location.href = "admin.html";   // 🔥 direct admin panel
+  }else{
+    localStorage.setItem("isAdmin","no");
+    localStorage.removeItem("adminEmail");
+    window.location.href = "index.html";   // normal user
+  }
 }
 </script>
 
-</bod
+</body>
+</html>
