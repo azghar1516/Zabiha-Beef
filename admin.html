@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel | Zabiha Beef</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, Arial;
+  background:#f5f5f5;
+}
+header{
+  background:#b10f0f;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-size:18px;
+}
+.container{
+  max-width:500px;
+  margin:20px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+}
+.item{
+  border-bottom:1px solid #ddd;
+  padding:12px 0;
+}
+.item label{
+  font-weight:bold;
+  color:#b10f0f;
+}
+input{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+}
+button{
+  width:100%;
+  padding:15px;
+  background:#b10f0f;
+  color:#fff;
+  border:none;
+  margin-top:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+.logout{
+  background:#333;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+Admin Panel – Zabiha Beef
+</header>
+
+<div class="container">
+
+<h3>Update Prices (Rs / kg)</h3>
+
+<!-- ITEMS -->
+<div id="items"></div>
+
+<button onclick="savePrices()">Save All Prices</button>
+<button class="logout" onclick="logout()">Logout</button>
+
+</div>
+
+<script>
+/* ================= ADMINS ================= */
+const ADMINS = [
+  "shazghar68@gmail.com",
+  "jawad.hanif@zabihabeef.com",
+  "hassan.shamim@zabihabeef.com",
+  "muntazer.mehdi@zabihabeef.com"
+];
+
+/* ================= ADMIN CHECK ================= */
+const adminEmail = localStorage.getItem("adminEmail");
+if(!adminEmail || !ADMINS.includes(adminEmail)){
+  alert("Access Denied");
+  window.location.href = "login.html";
+}
+
+/* ================= ALL CART ITEMS ================= */
+const ITEMS = [
+  "beef-boneless",
+  "beef-chest",
+  "beef-chops",
+  "beef-mince",
+  "beef-ribs",
+  "beef-shin",
+  "beef-steak",
+
+  "chicken-breast",
+  "chicken-leg",
+  "chicken-whole",
+
+  "mutton-boneless",
+  "mutton-chops",
+  "mutton-karahi",
+  "mutton-mince",
+
+  "veal-boneless",
+  "veal-chops",
+  "veal-mince"
+];
+
+/* ================= RENDER ITEMS ================= */
+const container = document.getElementById("items");
+
+ITEMS.forEach(item=>{
+  const div = document.createElement("div");
+  div.className = "item";
+
+  div.innerHTML = `
+    <label>${item.replace(/-/g," ").toUpperCase()}</label>
+    <input type="number" id="price_${item}" placeholder="Enter price">
+  `;
+
+  container.appendChild(div);
+
+  const saved = localStorage.getItem("price_" + item);
+  if(saved){
+    document.getElementById("price_" + item).value = saved;
+  }
+});
+
+/* ================= SAVE ================= */
+function savePrices(){
+  ITEMS.forEach(item=>{
+    const val = document.getElementById("price_" + item).value;
+    if(val){
+      localStorage.setItem("price_" + item, val);
+    }
+  });
+  alert("All prices updated successfully ✅");
+}
+
+/* ================= LOGOUT ================= */
+function logout(){
+  localStorage.removeItem("adminEmail");
+  localStorage.removeItem("isAdmin");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
