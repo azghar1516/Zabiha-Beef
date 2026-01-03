@@ -2,17 +2,18 @@
   "name": "Zabiha Beef",
   "short_name": "Zabiha Beef",
   "start_url": "/Zabiha-Beef/index.html",
+  "scope": "/Zabiha-Beef/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#b10f0f",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
