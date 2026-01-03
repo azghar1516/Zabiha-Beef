@@ -18,11 +18,11 @@
   align-items:center;
   justify-content:center;
   position:relative;
-  text-align:center;
 }
 
-/* LOGIN BUTTON */
-.login-btn{
+/* LOGIN + LOGOUT BUTTON */
+.login-btn,
+.logout-btn{
   position:absolute;
   right:15px;
   top:50%;
@@ -33,6 +33,7 @@
   text-decoration:none;
   font-size:14px;
   border-radius:4px;
+  cursor:pointer;
 }
 
 /* ADMIN BADGE */
@@ -49,18 +50,6 @@
   border-radius:4px;
   font-weight:bold;
 }
-
-/* ===== RESPONSIVE FIX (NO DESIGN CHANGE) ===== */
-@media(max-width:600px){
-  .top-brand{
-    font-size:20px;
-    padding:14px;
-  }
-  .login-btn{
-    font-size:12px;
-    padding:6px 10px;
-  }
-}
 </style>
 </head>
 
@@ -70,7 +59,9 @@
 <div class="top-brand">
   <span class="admin-badge" id="adminBadge">ADMIN</span>
   ZABIHA BEEF
+
   <a href="login.html" class="login-btn" id="loginBtn">Login</a>
+  <button class="logout-btn" id="logoutBtn" style="display:none;">Logout</button>
 </div>
 
 <!-- ===== HEADER ===== -->
@@ -90,7 +81,6 @@
 <div class="container">
   <div class="menu-grid">
 
-    <!-- ===== BEEF ===== -->
     <div class="category">
       <div class="category-title">BEEF (ZABIHA)</div>
 
@@ -119,7 +109,6 @@
       </a>
     </div>
 
-    <!-- ===== MUTTON ===== -->
     <div class="category">
       <div class="category-title">MUTTON</div>
 
@@ -140,7 +129,6 @@
       </a>
     </div>
 
-    <!-- ===== VEAL + CHICKEN ===== -->
     <div class="category">
       <div class="category-title">VEAL</div>
 
@@ -178,9 +166,7 @@
 <footer>
   <div class="footer-inner">
     <div>📞 03074999091</div>
-
-    <!-- RATEABLE STARS -->
-    <div class="stars" id="ratingStars">
+    <div id="ratingStars">
       <span data-rate="1">★</span>
       <span data-rate="2">★</span>
       <span data-rate="3">★</span>
@@ -190,17 +176,26 @@
   </div>
 </footer>
 
-<!-- ===== LOGIN / ADMIN CHECK ===== -->
+<!-- ===== LOGIN / LOGOUT / ADMIN CHECK ===== -->
 <script>
 const loggedIn = localStorage.getItem("loggedIn");
 const isAdmin = localStorage.getItem("isAdmin");
 
 if(loggedIn === "yes"){
-  document.getElementById("loginBtn").style.display = "none";
+  loginBtn.style.display = "none";
+  logoutBtn.style.display = "inline-block";
 }
+
 if(isAdmin === "yes"){
-  document.getElementById("adminBadge").style.display = "inline-block";
+  adminBadge.style.display = "inline-block";
 }
+
+/* LOGOUT */
+logoutBtn.onclick = ()=>{
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("isAdmin");
+  location.reload();
+};
 </script>
 
 <!-- ===== AUTO PRICE LOADER ===== -->
@@ -210,34 +205,10 @@ document.querySelectorAll(".item[data-key]").forEach(item=>{
   const priceSpan = item.querySelector(".price");
   const savedPrice = localStorage.getItem("price_" + key);
 
-  priceSpan.innerText = savedPrice 
-    ? "Rs " + savedPrice + " / kg" 
+  priceSpan.innerText = savedPrice
+    ? "Rs " + savedPrice + " / kg"
     : "Rs / kg";
 });
-</script>
-
-<!-- ===== STAR RATING SCRIPT ===== -->
-<script>
-const stars = document.querySelectorAll("#ratingStars span");
-
-stars.forEach(star=>{
-  star.addEventListener("click", ()=>{
-    const rate = star.dataset.rate;
-    localStorage.setItem("siteRating", rate);
-
-    stars.forEach(s=>{
-      s.style.color = s.dataset.rate <= rate ? "gold" : "#ffd1d1";
-    });
-  });
-});
-
-/* Load saved rating */
-const savedRating = localStorage.getItem("siteRating");
-if(savedRating){
-  stars.forEach(s=>{
-    s.style.color = s.dataset.rate <= savedRating ? "gold" : "#ffd1d1";
-  });
-}
 </script>
 
 </body>
