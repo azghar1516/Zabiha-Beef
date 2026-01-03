@@ -1,135 +1,51 @@
+<style>
 body{
   margin:0;
   font-family:Segoe UI, Arial;
   background:#f5f5f5;
 }
 
-/* TOP BRAND BAR */
-.top-brand{
+header{
   background:#b10f0f;
-  color:white;
-  text-align:center;
-  font-size:32px;
-  font-weight:bold;
-  padding:12px;
-  letter-spacing:2px;
-  position:relative;
-}
-
-.login-btn{
-  position:absolute;
-  right:15px;
-  top:50%;
-  transform:translateY(-50%);
-  background:white;
-  color:#b10f0f;
-  padding:6px 14px;
-  text-decoration:none;
-  font-size:14px;
-  border-radius:20px;
-  font-weight:bold;
-}
-
-/* HEADER */
-.main-header{
-  background:white;
-  border-bottom:2px solid #b10f0f;
-  padding:10px 15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.logo img{
-  height:45px;
-}
-
-/* NAV */
-nav a{
-  margin:0 10px;
-  text-decoration:none;
-  color:#b10f0f;
-  font-weight:500;
-}
-
-/* CONTENT */
-.container{
-  padding:20px;
-}
-
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-}
-
-.category{
-  border:2px solid #b10f0f;
-  background:white;
-}
-
-.category-title{
-  background:#b10f0f;
-  color:white;
-  padding:10px;
-  font-weight:bold;
-  text-align:center;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
-  border-bottom:1px solid #ddd;
-  text-decoration:none;
-  color:black;
-}
-
-.item:hover{
-  background:#f9f9f9;
-}
-
-.price{
-  color:#b10f0f;
-  font-weight:bold;
-}
-
-/* FOOTER */
-footer{
-  background:#b10f0f;
-  color:white;
+  color:#fff;
   padding:15px;
+  text-align:center;
+  font-size:20px;
 }
 
-.footer-inner{
-  display:flex;
-  justify-content:space-between;
+.container{
+  max-width:420px;
+  margin:30px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  .top-brand{
-    font-size:24px;
-  }
-
-  .main-header{
-    flex-direction:column;
-    gap:10px;
-  }
-
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
-  nav a{
-    margin:5px;
-  }
-
-  .footer-inner{
-    flex-direction:column;
-    gap:10px;
-    text-align:center;
-  }
+/* INPUT FIX */
+input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  font-size:15px;
+  box-sizing:border-box;
+  text-align:center;        /* 🔥 CENTER TEXT */
 }
+
+/* PLACEHOLDER CENTER */
+input::placeholder{
+  text-align:center;        /* 🔥 CENTER PLACEHOLDER */
+  color:#999;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:15px;
+  background:#b10f0f;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+  border-radius:4px;
+}
+</style>
