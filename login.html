@@ -75,10 +75,7 @@ button:hover{
 <div class="container">
 
 <label>Email</label>
-<input type="email" id="email" placeholder="Enter your email">
-
-<label>Phone</label>
-<input type="tel" id="phone" placeholder="03xxxxxxxxx">
+<input type="email" id="email" placeholder="Enter email">
 
 <!-- PASSWORD (ADMIN ONLY) -->
 <div id="passwordBox" class="hidden">
@@ -86,24 +83,22 @@ button:hover{
   <input type="password" id="password" placeholder="Enter admin password">
 </div>
 
+<label>Phone (optional for guest)</label>
+<input type="tel" id="phone" placeholder="03xxxxxxxxx">
+
 <button onclick="login()">Continue</button>
 
-<div class="error" id="errorMsg">Invalid admin password</div>
-
-<div class="note">
-• Guests can continue without password<br>
-• Admin email requires password
-</div>
+<div class="error" id="errorMsg"></div>
 
 </div>
 
 <script>
 /* ===== ADMIN EMAILS + PASSWORDS ===== */
 const adminAccounts = {
-  "shazghar68@gmail.com": "786786",
-  "jawad.hanif@zabihabeef.com": "123456",
-  "hassan.shamim@zabihabeef.com": "111111",
-  "muntazer.mehdi@zabihabeef.com": "222222"
+  "shazghar68@gmail.com": "shah1214",
+  "jawad.hanif@zabihabeef.com": "shah1214",
+  "hassan.shamim@zabihabeef.com": "1214",
+  "muntazer.mehdi@zabihabeef.com": "1214"
 };
 
 const emailInput = document.getElementById("email");
@@ -128,33 +123,41 @@ function login(){
 
   errorMsg.style.display = "none";
 
-  if(!email || !phone){
-    alert("Email aur phone number zaroori hai");
+  /* ===== ADMIN LOGIN ===== */
+  if(adminAccounts[email]){
+    if(!password){
+      errorMsg.innerText = "Admin ke liye password zaroori hai";
+      errorMsg.style.display = "block";
+      return;
+    }
+
+    if(adminAccounts[email] !== password){
+      errorMsg.innerText = "Invalid admin password";
+      errorMsg.style.display = "block";
+      return;
+    }
+
+    localStorage.setItem("loggedIn","yes");
+    localStorage.setItem("isAdmin","yes");
+    localStorage.setItem("userEmail", email);
+
+    window.location.href = "index.html";
     return;
   }
 
-  /* ADMIN LOGIN */
-  if(adminAccounts[email]){
-    if(adminAccounts[email] === password){
-      localStorage.setItem("loggedIn","yes");
-      localStorage.setItem("isAdmin","yes");
-      localStorage.setItem("userEmail", email);
-      localStorage.setItem("userPhone", phone);
-
-      window.location.href = "index.html";
-    }else{
-      errorMsg.style.display = "block";
-    }
+  /* ===== GUEST LOGIN ===== */
+  if(!email && !phone){
+    errorMsg.innerText = "Guest ke liye email ya phone me se ek zaroori hai";
+    errorMsg.style.display = "block";
+    return;
   }
-  /* GUEST LOGIN */
-  else{
-    localStorage.setItem("loggedIn","yes");
-    localStorage.setItem("isAdmin","no");
-    localStorage.setItem("userEmail", email);
-    localStorage.setItem("userPhone", phone);
 
-    window.location.href = "index.html";
-  }
+  localStorage.setItem("loggedIn","yes");
+  localStorage.setItem("isAdmin","no");
+  if(email) localStorage.setItem("userEmail", email);
+  if(phone) localStorage.setItem("userPhone", phone);
+
+  window.location.href = "index.html";
 }
 </script>
 
