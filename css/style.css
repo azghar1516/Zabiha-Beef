@@ -1,77 +1,92 @@
-*{
+body{
   margin:0;
-  padding:0;
-  box-sizing:border-box;
   font-family:Segoe UI, Arial;
+  background:#f5f5f5;
 }
 
-body{
-  background:#f4f4f4;
+/* TOP BRAND BAR */
+.top-brand{
+  background:#b10f0f;
+  color:white;
+  text-align:center;
+  font-size:32px;
+  font-weight:bold;
+  padding:12px;
+  letter-spacing:2px;
+  position:relative;
+}
+
+.login-btn{
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  background:white;
+  color:#b10f0f;
+  padding:6px 14px;
+  text-decoration:none;
+  font-size:14px;
+  border-radius:20px;
+  font-weight:bold;
 }
 
 /* HEADER */
-header{
-  background:#b10f0f;
-  color:white;
-  padding:15px 25px;
+.main-header{
+  background:white;
+  border-bottom:2px solid #b10f0f;
+  padding:10px 15px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
 .logo img{
-  height:40px;
+  height:45px;
 }
 
+/* NAV */
 nav a{
-  color:white;
-  margin-left:20px;
+  margin:0 10px;
   text-decoration:none;
+  color:#b10f0f;
   font-weight:500;
 }
 
-nav a:hover{
-  text-decoration:underline;
-}
-
-/* CONTAINER */
+/* CONTENT */
 .container{
-  padding:25px;
+  padding:20px;
 }
 
-/* MENU GRID */
 .menu-grid{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:25px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
 }
 
-/* CATEGORY BOX */
 .category{
-  background:white;
   border:2px solid #b10f0f;
+  background:white;
 }
 
 .category-title{
   background:#b10f0f;
   color:white;
-  padding:12px;
-  text-align:center;
+  padding:10px;
   font-weight:bold;
+  text-align:center;
 }
 
-/* ITEM */
 .item{
   display:flex;
   justify-content:space-between;
-  padding:12px 15px;
-  border-bottom:1px dotted #ccc;
-  color:black;
+  padding:10px;
+  border-bottom:1px solid #ddd;
   text-decoration:none;
+  color:black;
 }
 
 .item:hover{
-  background:#fff1f1;
+  background:#f9f9f9;
 }
 
 .price{
@@ -83,11 +98,38 @@ nav a:hover{
 footer{
   background:#b10f0f;
   color:white;
-  margin-top:40px;
+  padding:15px;
 }
 
 .footer-inner{
   display:flex;
   justify-content:space-between;
-  padding:15px 25px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .top-brand{
+    font-size:24px;
+  }
+
+  .main-header{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  nav a{
+    margin:5px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+  }
 }
