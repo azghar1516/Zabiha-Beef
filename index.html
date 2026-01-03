@@ -7,19 +7,12 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* ===== GLOBAL ===== */
-body{
-  margin:0;
-  font-family:Segoe UI, Arial, sans-serif;
-  background:#f5f5f5;
-}
-
 /* ===== TOP BRAND BAR ===== */
 .top-brand{
   background:#b10f0f;
   color:#fff;
-  padding:14px 16px;
-  font-size:24px;
+  padding:16px;
+  font-size:26px;
   font-weight:bold;
   display:flex;
   align-items:center;
@@ -31,22 +24,21 @@ body{
 /* LOGIN BUTTON */
 .login-btn{
   position:absolute;
-  right:12px;
+  right:15px;
   top:50%;
   transform:translateY(-50%);
   background:#fff;
   color:#b10f0f;
-  padding:7px 14px;
+  padding:8px 14px;
   text-decoration:none;
   font-size:14px;
-  border-radius:6px;
-  font-weight:600;
+  border-radius:4px;
 }
 
 /* ADMIN BADGE */
 .admin-badge{
   position:absolute;
-  left:12px;
+  left:15px;
   top:50%;
   transform:translateY(-50%);
   display:none;
@@ -54,135 +46,19 @@ body{
   color:#000;
   padding:5px 10px;
   font-size:12px;
-  border-radius:6px;
+  border-radius:4px;
   font-weight:bold;
 }
 
-/* ===== HEADER ===== */
-.main-header{
-  background:#fff;
-  padding:10px 15px;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid #ddd;
-}
-
-.logo img{
-  height:45px;
-}
-
-nav{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-nav a{
-  text-decoration:none;
-  color:#b10f0f;
-  font-weight:600;
-  font-size:14px;
-}
-
-/* ===== CONTENT ===== */
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:15px;
-}
-
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-  gap:16px;
-}
-
-/* ===== CATEGORY ===== */
-.category{
-  background:#fff;
-  border-radius:10px;
-  padding:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.08);
-}
-
-.category-title{
-  font-size:16px;
-  font-weight:700;
-  color:#b10f0f;
-  margin-bottom:10px;
-}
-
-/* ===== ITEM ===== */
-.item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 8px;
-  margin-bottom:6px;
-  text-decoration:none;
-  color:#000;
-  border-radius:6px;
-  transition:all 0.2s ease;
-}
-
-.item:hover{
-  background:#fbeaea;
-}
-
-.price{
-  font-weight:600;
-  color:#b10f0f;
-  font-size:14px;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  background:#fff;
-  border-top:1px solid #ddd;
-  margin-top:20px;
-}
-
-.footer-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:12px 15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:14px;
-}
-
-/* ===== MOBILE TWEAKS ===== */
+/* ===== RESPONSIVE FIX (NO DESIGN CHANGE) ===== */
 @media(max-width:600px){
   .top-brand{
     font-size:20px;
-    padding:12px;
+    padding:14px;
   }
-
   .login-btn{
-    font-size:13px;
+    font-size:12px;
     padding:6px 10px;
-  }
-
-  nav{
-    justify-content:center;
-    width:100%;
-    margin-top:8px;
-  }
-
-  nav a{
-    font-size:13px;
-  }
-
-  .menu-grid{
-    grid-template-columns:1fr;
-  }
-
-  .item{
-    padding:12px 10px;
-    font-size:15px;
   }
 }
 </style>
@@ -202,7 +78,6 @@ footer{
   <div class="logo">
     <img src="images/logo.png" alt="Zabiha Beef">
   </div>
-
   <nav>
     <a href="index.html">Raw Meat</a>
     <a href="special.html">Special Items</a>
@@ -213,46 +88,105 @@ footer{
 
 <!-- ===== CONTENT ===== -->
 <div class="container">
-<div class="menu-grid">
+  <div class="menu-grid">
 
-<div class="category">
-  <div class="category-title">BEEF (ZABIHA)</div>
-  <a class="item" href="cart/beef-steak.html" data-key="beef-steak">Beef Steak <span class="price">Loading...</span></a>
-  <a class="item" href="cart/beef-mince.html" data-key="beef-mince">Beef Mince <span class="price">Loading...</span></a>
-  <a class="item" href="cart/beef-boneless.html" data-key="beef-boneless">Beef Boneless <span class="price">Loading...</span></a>
-  <a class="item" href="cart/beef-ribs.html" data-key="beef-ribs">Beef Ribs <span class="price">Loading...</span></a>
-  <a class="item" href="cart/beef-shin.html" data-key="beef-shin">Beef Shin <span class="price">Loading...</span></a>
-  <a class="item" href="cart/beef-chest.html" data-key="beef-chest">Beef Chest <span class="price">Loading...</span></a>
-</div>
+    <!-- ===== BEEF ===== -->
+    <div class="category">
+      <div class="category-title">BEEF (ZABIHA)</div>
 
-<div class="category">
-  <div class="category-title">MUTTON</div>
-  <a class="item" href="cart/mutton-karahi.html" data-key="mutton-karahi">Mutton Karahi Cut <span class="price">Loading...</span></a>
-  <a class="item" href="cart/mutton-boneless.html" data-key="mutton-boneless">Mutton Boneless <span class="price">Loading...</span></a>
-  <a class="item" href="cart/mutton-chops.html" data-key="mutton-chops">Mutton Chops <span class="price">Loading...</span></a>
-  <a class="item" href="cart/mutton-mince.html" data-key="mutton-mince">Mutton Mince <span class="price">Loading...</span></a>
-</div>
+      <a class="item" href="cart/beef-steak.html" data-key="beef-steak">
+        Beef Steak <span class="price">Loading...</span>
+      </a>
 
-<div class="category">
-  <div class="category-title">VEAL</div>
-  <a class="item" href="cart/veal-chops.html" data-key="veal-chops">Veal Chops <span class="price">Loading...</span></a>
-  <a class="item" href="cart/veal-mince.html" data-key="veal-mince">Veal Mince <span class="price">Loading...</span></a>
-  <a class="item" href="cart/veal-boneless.html" data-key="veal-boneless">Veal Boneless <span class="price">Loading...</span></a>
+      <a class="item" href="cart/beef-mince.html" data-key="beef-mince">
+        Beef Mince <span class="price">Loading...</span>
+      </a>
 
-  <div class="category-title" style="margin-top:12px;">CHICKEN</div>
-  <a class="item" href="cart/chicken-whole.html" data-key="chicken-whole">Whole Chicken <span class="price">Loading...</span></a>
-  <a class="item" href="cart/chicken-breast.html" data-key="chicken-breast">Chicken Breast <span class="price">Loading...</span></a>
-  <a class="item" href="cart/chicken-leg.html" data-key="chicken-leg">Chicken Leg <span class="price">Loading...</span></a>
-</div>
+      <a class="item" href="cart/beef-boneless.html" data-key="beef-boneless">
+        Beef Boneless <span class="price">Loading...</span>
+      </a>
 
-</div>
+      <a class="item" href="cart/beef-ribs.html" data-key="beef-ribs">
+        Beef Ribs <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/beef-shin.html" data-key="beef-shin">
+        Beef Shin <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/beef-chest.html" data-key="beef-chest">
+        Beef Chest <span class="price">Loading...</span>
+      </a>
+    </div>
+
+    <!-- ===== MUTTON ===== -->
+    <div class="category">
+      <div class="category-title">MUTTON</div>
+
+      <a class="item" href="cart/mutton-karahi.html" data-key="mutton-karahi">
+        Mutton Karahi Cut <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/mutton-boneless.html" data-key="mutton-boneless">
+        Mutton Boneless <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/mutton-chops.html" data-key="mutton-chops">
+        Mutton Chops <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/mutton-mince.html" data-key="mutton-mince">
+        Mutton Mince <span class="price">Loading...</span>
+      </a>
+    </div>
+
+    <!-- ===== VEAL + CHICKEN ===== -->
+    <div class="category">
+      <div class="category-title">VEAL</div>
+
+      <a class="item" href="cart/veal-chops.html" data-key="veal-chops">
+        Veal Chops <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/veal-mince.html" data-key="veal-mince">
+        Veal Mince <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/veal-boneless.html" data-key="veal-boneless">
+        Veal Boneless <span class="price">Loading...</span>
+      </a>
+
+      <div class="category-title" style="margin-top:15px;">CHICKEN</div>
+
+      <a class="item" href="cart/chicken-whole.html" data-key="chicken-whole">
+        Whole Chicken <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/chicken-breast.html" data-key="chicken-breast">
+        Chicken Breast <span class="price">Loading...</span>
+      </a>
+
+      <a class="item" href="cart/chicken-leg.html" data-key="chicken-leg">
+        Chicken Leg <span class="price">Loading...</span>
+      </a>
+    </div>
+
+  </div>
 </div>
 
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-inner">
     <div>📞 03074999091</div>
-    <div>⭐⭐⭐⭐☆</div>
+
+    <!-- RATEABLE STARS -->
+    <div class="stars" id="ratingStars">
+      <span data-rate="1">★</span>
+      <span data-rate="2">★</span>
+      <span data-rate="3">★</span>
+      <span data-rate="4">★</span>
+      <span data-rate="5">★</span>
+    </div>
   </div>
 </footer>
 
@@ -271,17 +205,39 @@ if(isAdmin === "yes"){
 
 <!-- ===== AUTO PRICE LOADER ===== -->
 <script>
-document.querySelectorAll(".item[data-key]").forEach(item => {
+document.querySelectorAll(".item[data-key]").forEach(item=>{
   const key = item.dataset.key;
   const priceSpan = item.querySelector(".price");
   const savedPrice = localStorage.getItem("price_" + key);
 
-  if(savedPrice){
-    priceSpan.innerText = "Rs " + savedPrice + " / kg";
-  }else{
-    priceSpan.innerText = "Rs / kg";
-  }
+  priceSpan.innerText = savedPrice 
+    ? "Rs " + savedPrice + " / kg" 
+    : "Rs / kg";
 });
+</script>
+
+<!-- ===== STAR RATING SCRIPT ===== -->
+<script>
+const stars = document.querySelectorAll("#ratingStars span");
+
+stars.forEach(star=>{
+  star.addEventListener("click", ()=>{
+    const rate = star.dataset.rate;
+    localStorage.setItem("siteRating", rate);
+
+    stars.forEach(s=>{
+      s.style.color = s.dataset.rate <= rate ? "gold" : "#ffd1d1";
+    });
+  });
+});
+
+/* Load saved rating */
+const savedRating = localStorage.getItem("siteRating");
+if(savedRating){
+  stars.forEach(s=>{
+    s.style.color = s.dataset.rate <= savedRating ? "gold" : "#ffd1d1";
+  });
+}
 </script>
 
 </body>
