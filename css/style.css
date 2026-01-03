@@ -8,7 +8,6 @@
 body{
   font-family:Segoe UI, Arial, sans-serif;
   background:#f4f4f4;
-  line-height:1.4;
 }
 
 /* ===== TOP BRAND BAR ===== */
@@ -23,7 +22,6 @@ body{
   letter-spacing:1px;
 }
 
-/* LOGIN BUTTON */
 .login-btn{
   position:absolute;
   right:15px;
@@ -86,11 +84,11 @@ nav a:hover{
   padding:0 15px;
 }
 
-/* GRID (DESKTOP) */
+/* GRID */
 .menu-grid{
   display:flex;
   gap:22px;
-  align-items:flex-start;
+  flex-wrap:wrap; /* IMPORTANT FIX */
 }
 
 /* CATEGORY BOX */
@@ -98,6 +96,7 @@ nav a:hover{
   background:#fff;
   border:2px solid #b10f0f;
   flex:1;
+  min-width:280px; /* prevents squeeze */
   transition:0.25s ease;
 }
 
@@ -122,7 +121,7 @@ nav a:hover{
   transition:all 0.2s ease;
 }
 
-/* ITEM HOVER */
+/* ITEM HOVER — ORIGINAL */
 .item:hover{
   background:#b10f0f;
   color:#fff;
@@ -154,28 +153,22 @@ footer{
   padding:14px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   font-size:14px;
+  align-items:center;
 }
 
-/* ================================================= */
-/* ================ MOBILE RESPONSIVE ============== */
-/* ================================================= */
+/* ========================= */
+/* ===== MOBILE FIX ONLY ==== */
+/* ========================= */
 
-@media (max-width: 768px){
+@media(max-width:600px){
 
-  .top-brand{
-    font-size:20px;
-    padding:10px;
+  .menu-grid{
+    flex-direction:column;
   }
 
-  .login-btn{
-    font-size:12px;
-    padding:6px 10px;
-  }
-
-  .main-header{
-    padding:10px 12px;
+  .category{
+    width:100%;
   }
 
   nav{
@@ -186,26 +179,6 @@ footer{
 
   nav a{
     margin:6px 10px;
-    font-size:13px;
-  }
-
-  /* STACK CATEGORIES */
-  .menu-grid{
-    flex-direction:column;
-    gap:16px;
-  }
-
-  .category{
-    width:100%;
-  }
-
-  .item{
-    font-size:15px;
-    padding:13px 14px;
-  }
-
-  .price{
-    font-size:14px;
   }
 
   .footer-inner{
