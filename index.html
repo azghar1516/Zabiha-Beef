@@ -6,17 +6,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#b10f0f">
+<meta name="theme-color" content="#c13600">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
 
 <style>
+/* SIDEBAR LINKS STYLE */
+#sidebar a{
+  display:block;
+  text-decoration:none;
+  color:#c13600;
+  font-size:16px;
+  padding:10px 8px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+#sidebar a:hover{
+  background:#c13600;
+  color:#fff;
+}
+
+/* HEADER LEFT GROUP */
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* SIDEBAR BUTTON */
+.menu-btn{
+  font-size:26px;
+  cursor:pointer;
+  color:#c13600;
+  user-select:none;
+  z-index:10001;
+  position:relative;
+}
+
+
 /* ===== TOP BRAND BAR ===== */
 .top-brand{
-  background:#b10f0f;
+  background:#c13600;
   color:#fff;
   padding:16px;
   font-size:26px;
-  font-weight:bold;
+  font-weight:700;
+  font-family:'Poppins', sans-serif;   /* 👈 YEH LINE */
+  letter-spacing:1px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -31,7 +68,7 @@
   top:50%;
   transform:translateY(-50%);
   background:#fff;
-  color:#b10f0f;
+  color:#c13600;
   padding:8px 14px;
   text-decoration:none;
   font-size:14px;
@@ -53,165 +90,1212 @@
   border-radius:4px;
   font-weight:bold;
 }
+
+/* ===== HEADER STICKY ===== */
+.main-header{
+  position:sticky;
+  top:0;
+  z-index:500;
+  background:#fff;
+}
+
+/* ===== HEADER ACTIVE LINK ===== */
+.main-header nav a.active{
+  color:#c13600;
+  font-weight:bold;
+  border-bottom:2px solid #c13600;
+}
+
+/* ===== SECTION OFFSET FIX ===== */
+section{ scroll-margin-top:140px; }
+
+/* ===== SPECIAL ITEMS STYLE ONLY ===== */
+.special-scroll{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding:10px 0 20px;
+}
+.special-scroll::-webkit-scrollbar{ height:6px; }
+.special-scroll::-webkit-scrollbar-thumb{
+  background:#c13600;
+  border-radius:10px;
+}
+
+.special-card{
+  min-width:230px;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.15);
+  text-decoration:none;
+  color:#000;
+  position:relative;
+  flex-shrink:0;
+}
+
+.special-card img{
+  width:100%;
+  height:160px;
+  object-fit:contain;
+  padding:12px;
+}
+
+.special-title{
+  font-weight:bold;
+  font-size:15px;
+  padding:10px 12px 14px;
+}
+
+.special-price{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:#c13600;
+  color:#fff;
+  padding:5px 10px;
+  font-size:13px;
+  font-weight:bold;
+  border-radius:6px;
+}
+/* ===== SIDEBAR FIX ===== */
+
+/* Menu heading */
+.sidebar h3{
+  margin-top:0;
+  color:#c13600;
+  font-size:20px;
+}
+
+/* Links */
+.side-link{
+  display:block;
+  margin:12px 0;
+  padding:12px;
+  background:#fff;
+  color:#c13600;
+  text-decoration:none;
+  border-radius:8px;
+  font-size:15px;
+  font-color:#fff;
+  border:2px solid #c13600;
+  transition:0.25s;
+}
+
+/* Hover effect */
+.side-link:hover{
+  background:#fff;
+  color:#c13600;
+  transform:translateX(5px);
+}
+
+/* Close button */
+.close-btn{
+  width:100%;
+  margin-top:20px;
+  background:#333;
+  color:#fff;
+  border:none;
+  padding:10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.sidebar{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:#fff;
+  padding:20px;
+  box-shadow:2px 0 15px rgba(0,0,0,0.4);
+  transition:0.3s ease;
+  z-index:10000;   
+}
+
 </style>
 </head>
 
 <body>
+<!-- ===== SIDEBAR ===== -->
+<div id="sidebar" class="sidebar">
+  <h3>Menu</h3>
+
+  <a href="#raw" class="side-link" onclick="closeSidebar()">Raw Meat</a>
+  <a href="#special" class="side-link" onclick="closeSidebar()">Special Items</a>
+  <a href="#deals" class="side-link" onclick="closeSidebar()">Deals</a>
+  <a href="#frozen" class="side-link" onclick="closeSidebar()">Frozen Meat</a>
+  <a href="cart.html" class="side-link">Cart 🛒</a>
+
+  <button class="close-btn" onclick="closeSidebar()">Close ✖</button>
+</div>
 
 <!-- ===== TOP BRAND ===== -->
 <div class="top-brand">
   <span class="admin-badge" id="adminBadge">ADMIN</span>
   ZABIHA BEEF
-
   <a href="login.html" class="login-btn" id="loginBtn">Login</a>
   <button class="logout-btn" id="logoutBtn" style="display:none;">Logout</button>
 </div>
-
 <!-- ===== HEADER ===== -->
 <header class="main-header">
-  <div class="logo">
-    <img src="images/logo.png" alt="Zabiha Beef">
+
+  <!-- LEFT GROUP (SIDEBAR + LOGO) -->
+  <div class="header-left">
+
+    <!-- SIDEBAR BUTTON -->
+    <span class="menu-btn" onclick="openSidebar()">☰</span>
+
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="images/logo.png" alt="Zabiha Beef">
+    </div>
+
   </div>
-  <nav>
-    <a href="index.html">Raw Meat</a>
-    <a href="special.html">Special Items</a>
-    <a href="deals.html">Deals</a>
-    <a href="frozen.html">Frozen Meat</a>
+
+  <nav id="mainNav"> 
+    <a href="cart.html">Cart 🛒</a>
+    <a href="#raw" class="active">Raw Meat</a>
+    <a href="#special">Special Items</a>
+    <a href="#deals">Deals</a>
+    <a href="#frozen">Frozen Meat</a>
   </nav>
+
 </header>
+<!-- ===== REPEAT ORDER (NO CART) ===== -->
+<div id="repeatVisitBox" style="
+display:none;
+background:#f8f8f8;
+border:1px solid #ddd;
+padding:18px;
+margin:20px;
+text-align:center;
+border-radius:8px;
+">
 
-<!-- ===== CONTENT ===== -->
+  <strong>Welcome Back!</strong><br><br>
+  <span style="color:#555;">
+    Repeat your last order easily
+  </span><br><br>
+
+  <a href="#raw" style="
+  background:#c13600;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:5px;
+  text-decoration:none;
+  font-size:14px;
+  display:inline-block;">
+    Order Again
+  </a>
+</div>
+<!-- ================= RAW MEAT (FIXED ONLY TAGS) ================= -->
+<section id="raw">
 <div class="container">
-  <div class="menu-grid">
+<div class="menu-grid">
 
-    <div class="category">
-      <div class="category-title">BEEF (ZABIHA)</div>
+<div class="category">
+<div class="category-title">BEEF (ZABIHA)</div>
 
-      <a class="item" href="cart/beef-steak.html" data-key="beef-steak">
-        Beef Steak <span class="price">Loading...</span>
-      </a>
+<div class="item">
+  Beef Steak <span 
+  class="price"
+  data-item="Beef Steak"
+  data-default="1200"
+>
+  Rs 1200
+</span>
 
-      <a class="item" href="cart/beef-mince.html" data-key="beef-mince">
-        Beef Mince <span class="price">Loading...</span>
-      </a>
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
 
-      <a class="item" href="cart/beef-boneless.html" data-key="beef-boneless">
-        Beef Boneless <span class="price">Loading...</span>
-      </a>
+  <span class="qty">1</span>
 
-      <a class="item" href="cart/beef-ribs.html" data-key="beef-ribs">
-        Beef Ribs <span class="price">Loading...</span>
-      </a>
+  <button onclick="changeQty(this,0.5)">+</button>
 
-      <a class="item" href="cart/beef-shin.html" data-key="beef-shin">
-        Beef Shin <span class="price">Loading...</span>
-      </a>
+  <button onclick="addItem(this,'Beef Steak')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
 
-      <a class="item" href="cart/beef-chest.html" data-key="beef-chest">
-        Beef Chest <span class="price">Loading...</span>
-      </a>
+
+</div>
+
+<div class="item">
+  Beef Mince <span 
+  class="price"
+  data-item="Beef Mince"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Mince')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Beef Boneless <span 
+  class="price"
+  data-item="Beef Boneless"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Boneless')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Beef Ribs <span 
+  class="price"
+  data-item="Beef Ribs"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Ribs')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Beef Shins <span 
+  class="price"
+  data-item="Beef Shins"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Shins')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Beef Chest <span 
+  class="price"
+  data-item="Beef Chest"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Chest')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+</div>
+
+<div class="category">
+<div class="category-title">MUTTON</div>
+
+<div class="item">
+  Mutton Karahi <span 
+  class="price"
+  data-item="Mutton Karahi"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Mutton Karahi')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Mutton Boneless <span 
+  class="price"
+  data-item="Mutton Boneless"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Mutton Boneless')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Mutton Chops <span 
+  class="price"
+  data-item="Mutton Chops"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Mutton Chops')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Mutton Mince <span 
+  class="price"
+  data-item="Mutton Mince"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Mutton Mince')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+</div>
+
+<div class="category">
+<div class="category-title">VEAL</div>
+
+<div class="item">
+  Veal Chops <span 
+  class="price"
+  data-item="Veal Chops"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Veal Chops')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Veal Mince <span 
+  class="price"
+  data-item="Veal Mince"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Veal Mince')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Veal Boneless <span 
+  class="price"
+  data-item="Veal Boneless"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Veal Boneless')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="category-title" style="margin-top:15px;">CHICKEN</div>
+
+<div class="item">
+  Whole Chicken <span 
+  class="price"
+  data-item="Whole Chicken"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Whole Chicken')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Chicken Breast <span 
+  class="price"
+  data-item="Chicken Breast"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Chicke Breast')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+<div class="item">
+  Chicken Leg <span 
+  class="price"
+  data-item="Chicken Leg"
+  data-default="1200"
+>
+  Rs 1200
+</span>
+
+  <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Chicken Leg')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+</div>
+
+<!-- ================= SPECIAL ITEMS ================= -->
+<section id="special">
+  <div class="container">
+    <h2>Special Items</h2>
+
+    <div class="special-scroll">
+
+      <!-- ITEM 1 -->
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Premium Beef Steak"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+        <img src="images/beef-steak.jpg" alt="Premium Beef Steak">
+        <div class="special-title">Premium Beef Steak</div>
+
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Steak')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+
+ 
+</div>
+
+
+      </div>
+
+      <!-- ITEM 2 -->
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Beef Boneless"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <img src="images/beef-boneless.jpg" alt="Beef Boneless Export Cut">
+        <div class="special-title">Beef Boneless Export Cut</div>
+
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Boneless')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Mutton Karahi"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <img src="images/mutton-karahi.jpg" alt="Mutton Karahi Cut">
+        <div class="special-title">Mutton Karahi Cut</div>
+
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Mutton Karahi')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+      </div>
+
+      <!-- ITEM 4 -->
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Veal Chops"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <img src="images/veal-chops.jpg" alt="Veal Chops Special">
+        <div class="special-title">Veal Chops Special</div>
+
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Veal Chops')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+      </div>
+
+      <!-- ITEM 5 -->
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Beef Ribs"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <img src="images/beef-ribs.jpg" alt="Beef BBQ Ribs">
+        <div class="special-title">Beef BBQ Ribs</div>
+
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Beef Ribs')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+      </div>
+
+      <!-- ITEM 6 -->
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Chicken Breast Fillet"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <img src="images/chicken-breast.jpg" alt="Chicken Breast Fillet">
+        <div class="special-title">Chicken Breast Fillet</div>
+
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-0.5)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,0.5)">+</button>
+
+  <button onclick="addItem(this,'Chicke Breast Fillet')"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+          </div>
+  </div>
+</section>
+
+<section id="deals">
+  <div class="container">
+    <h2>Deals</h2>
+
+    <div class="special-scroll">
+
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Beef Mince 2kg + Beef Ribs 1kg"
+  data-default="1200">
+  Rs 1200 / kg
+</span>
+
+        <div class="special-title">
+          Beef Mince 2kg + Beef Ribs 1kg
+        </div>
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-1,true)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,1,true)">+</button>
+
+  <button onclick="addItem(this,'Beef Mince 2kg + Beef Ribs 1kg',true)"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+
+      </div>
+
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Whole Chicken 3kg Family Pack"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <div class="special-title">
+          Whole Chicken 3kg Family Pack
+        </div>
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-1,true)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,1,true)">+</button>
+
+  <button onclick="addItem(this,'Whole Chicken 3kg Family Pack',true)"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+      </div>
+
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="BBQ Beef Ribs + Chicken Wings"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <div class="special-title">
+          BBQ Beef Ribs + Chicken Wings
+        </div>
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-1,true)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,1,true)">+</button>
+
+  <button onclick="addItem(this,'BBQ Beef Ribs + Chicken Wings',true)"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+      </div>
+
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Mutton Chops 2kg Saver Deal"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <div class="special-title">
+          Mutton Chops 2kg Saver Deal
+        </div>
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-1,true)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,1,true)">+</button>
+
+  <button onclick="addItem(this,'Mutton Chops 2kg Saver Deal',true)"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+      </div>
+
+      <div class="special-card">
+        <span 
+  class="special-price price"
+  data-item="Veal Mince 2kg Value Pack"
+  data-default="1200"
+>
+  Rs 1200 / kg
+</span>
+
+        <div class="special-title">
+          Veal Mince 2kg Value Pack
+        </div>
+        <div style="float:right;display:flex;gap:4px;align-items:center;">
+  <button onclick="changeQty(this,-1,true)">−</button>
+
+  <span class="qty">1</span>
+
+  <button onclick="changeQty(this,1,true)">+</button>
+
+  <button onclick="addItem(this,'Veal Mince 2kg Value Pack',true)"
+    style="background:#c13600;color:#fff;border:none;padding:4px 8px;border-radius:4px;">
+    Add
+  </button>
+</div>
+
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="frozen"><div class="container"><h2>Frozen Meat</h2></div></section>
+    <marquee behavior="alternate" scrollamount="6">
+      <span style="font-size:40px;font-weight:900;color:#c13600;">
+        COMING SOON
+      </span>
+    </marquee>
+
+  </div>
+</section>
+
+
+<!-- ===== LOGIN ===== -->
+<script>
+const loggedIn=localStorage.getItem("loggedIn");
+const isAdmin=localStorage.getItem("isAdmin");
+if(loggedIn==="yes"){loginBtn.style.display="none";logoutBtn.style.display="inline-block";}
+if(isAdmin==="yes"){adminBadge.style.display="inline-block";}
+logoutBtn.onclick=()=>{localStorage.clear();location.reload();}
+</script>
+
+<!-- ===== PRICE LOADER (RAW + SPECIAL) ===== -->
+<script>
+document.querySelectorAll("[data-key]").forEach(item=>{
+const key=item.dataset.key;
+const price=item.querySelector(".price");
+const saved=localStorage.getItem("price_"+key);
+if(price){price.innerText=saved?("Rs "+saved):"Rs";}
+});
+</script>
+
+<!-- ===== SCROLL ACTIVE MENU ===== -->
+<script>
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll("#mainNav a");
+window.addEventListener("scroll",()=>{
+let current="raw";
+sections.forEach(sec=>{
+const top=sec.offsetTop-150;
+if(pageYOffset>=top&&pageYOffset<top+sec.offsetHeight){current=sec.id;}
+});
+navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+current));
+});
+</script>
+<!-- ===== PROFESSIONAL FOOTER ===== -->
+<footer style="background:#111;color:#fff;padding:30px 15px;margin-top:40px;">
+  
+  <div style="max-width:1100px;margin:auto;text-align:center;">
+    
+    <h3 style="margin-bottom:15px;font-size:20px;letter-spacing:1px;">
+      ZABIHA BEEF
+    </h3>
+
+    <p style="margin-bottom:20px;font-size:14px;color:#ccc;">
+      Premium Halal Meat • Fresh • Hygienic • Trusted
+    </p>
+
+    <div style="margin-bottom:20px;">
+      <strong>Contact Number</strong><br>
+      <span style="color:#ccc;">0307-4999091</span>
     </div>
 
-    <div class="category">
-      <div class="category-title">MUTTON</div>
-
-      <a class="item" href="cart/mutton-karahi.html" data-key="mutton-karahi">
-        Mutton Karahi Cut <span class="price">Loading...</span>
-      </a>
-
-      <a class="item" href="cart/mutton-boneless.html" data-key="mutton-boneless">
-        Mutton Boneless <span class="price">Loading...</span>
-      </a>
-
-      <a class="item" href="cart/mutton-chops.html" data-key="mutton-chops">
-        Mutton Chops <span class="price">Loading...</span>
-      </a>
-
-      <a class="item" href="cart/mutton-mince.html" data-key="mutton-mince">
-        Mutton Mince <span class="price">Loading...</span>
-      </a>
+    <div style="margin-bottom:20px;">
+      <strong>Admin Emails</strong><br>
+      <span style="color:#ccc;display:block;">jawad.hanif@zabihabeef.com</span>
+      <span style="color:#ccc;display:block;">hassan.shamim@zabihabeef.com</span>
+      <span style="color:#ccc;display:block;">muntazer.mehdi@zabihabeef.com</span>
+      <span style="color:#ccc;display:block;">shazghar68@gmail.com</span>
     </div>
 
-    <div class="category">
-      <div class="category-title">VEAL</div>
+    <hr style="border:none;border-top:1px solid #333;margin:20px 0;">
 
-      <a class="item" href="cart/veal-chops.html" data-key="veal-chops">
-        Veal Chops <span class="price">Loading...</span>
-      </a>
+    <p style="font-size:13px;color:#777;">
+      © 2026 Zabiha Beef. All Rights Reserved.
+    </p>
 
-      <a class="item" href="cart/veal-mince.html" data-key="veal-mince">
-        Veal Mince <span class="price">Loading...</span>
-      </a>
+  </div>
+</footer>
+<script>
+if(localStorage.getItem("hasOrderedBefore")==="yes"){
+  document.getElementById("repeatVisitBox").style.display="block";
+}
+</script>
 
-      <a class="item" href="cart/veal-boneless.html" data-key="veal-boneless">
-        Veal Boneless <span class="price">Loading...</span>
-      </a>
+<script>
+document.querySelectorAll(".price[data-item]").forEach(span=>{
+  const item = span.dataset.item;
+  const def = span.dataset.default;
 
-      <div class="category-title" style="margin-top:15px;">CHICKEN</div>
+  // load saved price
+  const saved = localStorage.getItem("price_"+item);
+  span.innerText = "Rs " + (saved || def);
 
-      <a class="item" href="cart/chicken-whole.html" data-key="chicken-whole">
-        Whole Chicken <span class="price">Loading...</span>
-      </a>
+  // admin click to change price
+  if(localStorage.getItem("isAdmin")==="yes"){
+    span.style.cursor="pointer";
+    span.title="Click to change price";
 
-      <a class="item" href="cart/chicken-breast.html" data-key="chicken-breast">
-        Chicken Breast <span class="price">Loading...</span>
-      </a>
-
-      <a class="item" href="cart/chicken-leg.html" data-key="chicken-leg">
-        Chicken Leg <span class="price">Loading...</span>
-      </a>
-    </div>
+    span.onclick = ()=>{
+      const newPrice = prompt("Enter new price for "+item, saved || def);
+      if(newPrice && !isNaN(newPrice)){
+        localStorage.setItem("price_"+item, newPrice);
+        span.innerText = "Rs " + newPrice;
+        alert("Price updated");
+      }
+    };
+  }
+});
+</script>
+<!-- ===== ADD TO CART NOTIFICATION ===== -->
+<div id="cartToast" style="
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+background:#c13600;
+color:#fff;
+padding:14px 22px;
+border-radius:8px;
+font-size:14px;
+font-weight:bold;
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+display:none;
+z-index:9999;
+">
+Item added to cart
+</div>
 
   </div>
 </div>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-inner">
-    <div>📞 03074999091</div>
-    <div id="ratingStars">
-      <span data-rate="1">★</span>
-      <span data-rate="2">★</span>
-      <span data-rate="3">★</span>
-      <span data-rate="4">★</span>
-      <span data-rate="5">★</span>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== LOGIN / LOGOUT / ADMIN CHECK ===== -->
 <script>
-const loggedIn = localStorage.getItem("loggedIn");
-const isAdmin = localStorage.getItem("isAdmin");
+let selectedItem = null;
+let isDealItem = false;
 
-if(loggedIn === "yes"){
-  loginBtn.style.display = "none";
-  logoutBtn.style.display = "inline-block";
+function addToCart(name, price, isDeal = false){
+  selectedItem = { name, price };
+  isDealItem = isDeal;
+
+  document.getElementById("qtyItemName").innerText = name;
+
+  const qtyInput = document.getElementById("qtyInput");
+
+  if(isDeal){
+    qtyInput.min = 1;
+    qtyInput.step = 1;
+    qtyInput.value = 1;
+  }else{
+    qtyInput.min = 0.5;
+    qtyInput.step = 0.5;
+    qtyInput.value = 1;
+  }
+
+  document.getElementById("qtyModal").style.display = "flex";
 }
 
-if(isAdmin === "yes"){
-  adminBadge.style.display = "inline-block";
+function closeQtyModal(){
+  document.getElementById("qtyModal").style.display = "none";
 }
 
-/* LOGOUT */
-logoutBtn.onclick = ()=>{
-  localStorage.removeItem("loggedIn");
-  localStorage.removeItem("isAdmin");
-  location.reload();
-};
+function confirmQty(){
+  const qty = parseFloat(document.getElementById("qtyInput").value);
+
+  if(isNaN(qty) || qty < 1){
+    alert("Please select valid quantity");
+    return;
+  }
+
+  if(isDealItem && !Number.isInteger(qty)){
+    alert("Deals quantity must be whole number (1, 2, 3...)");
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existing = cart.find(i => i.name === selectedItem.name);
+
+  if(existing){
+    existing.qty += qty;
+  }else{
+    cart.push({
+      name: selectedItem.name,
+      price: selectedItem.price,
+      qty: qty
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  closeQtyModal();
+
+  const toast = document.getElementById("cartToast");
+  toast.innerText = selectedItem.name + " added (" + qty + ")";
+  toast.style.display = "block";
+
+  setTimeout(()=>toast.style.display="none",2000);
+}
 </script>
 
-<!-- ===== AUTO PRICE LOADER ===== -->
-<script>
-document.querySelectorAll(".item[data-key]").forEach(item=>{
-  const key = item.dataset.key;
-  const priceSpan = item.querySelector(".price");
-  const savedPrice = localStorage.getItem("price_" + key);
+<!-- ===== QUANTITY MODAL ===== -->
 
-  priceSpan.innerText = savedPrice
-    ? "Rs " + savedPrice + " / kg"
-    : "Rs / kg";
-});
+<script>
+function getLivePrice(item){
+  return parseInt(localStorage.getItem("price_"+item)) 
+         || parseInt(
+              document.querySelector(`.price[data-item="${item}"]`)
+              ?.dataset.default
+            );
+}
+</script>
+<script>
+function changeQty(btn, step, isDeal=false){
+  const qtySpan = btn.parentElement.querySelector(".qty");
+  let qty = parseFloat(qtySpan.innerText);
+
+  qty += step;
+
+  if(isDeal){
+    if(qty < 1) qty = 1;
+    qty = Math.round(qty);
+  }else{
+    if(qty < 0.5) qty = 0.5;
+    qty = Math.round(qty*2)/2;
+  }
+
+  qtySpan.innerText = qty;
+}
+
+function addItem(btn, name, isDeal=false){
+  const qty = parseFloat(btn.parentElement.querySelector(".qty").innerText);
+  const price = getLivePrice(name);
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existing = cart.find(i=>i.name===name);
+
+  if(existing){
+    existing.qty += qty;
+  }else{
+    cart.push({name, price, qty});
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  const toast = document.getElementById("cartToast");
+  toast.innerText = name+" added ("+qty+")";
+  toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",2000);
+}
+</script>
+<script>
+function openSidebar(){
+  document.getElementById("sidebar").style.left = "0";
+}
+
+function closeSidebar(){
+  document.getElementById("sidebar").style.left = "-260px";
+}
 </script>
 
 </body>
