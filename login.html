@@ -12,7 +12,7 @@ body{
   background:#f5f5f5;
 }
 header{
-  background:#b10f0f;
+  background:#c13600;
   color:#fff;
   padding:15px;
   text-align:center;
@@ -42,7 +42,7 @@ button{
   width:100%;
   margin-top:20px;
   padding:14px;
-  background:#b10f0f;
+  background:#c13600;
   color:#fff;
   border:none;
   font-size:16px;
@@ -51,20 +51,13 @@ button{
 button:hover{
   background:#8e0c0c;
 }
-.note{
-  font-size:13px;
-  color:#555;
-  margin-top:10px;
-}
 .error{
-  color:#b10f0f;
+  color:#c13600;
   margin-top:10px;
   font-size:14px;
   display:none;
 }
-.hidden{
-  display:none;
-}
+.hidden{display:none;}
 </style>
 </head>
 
@@ -117,51 +110,49 @@ function login(){
   const phone = document.getElementById("phone").value.trim();
   const password = document.getElementById("password").value;
 
-  errorMsg.style.display = "none";
+  errorMsg.style.display="none";
 
-  /* ===== ADMIN LOGIN ===== */
+  /* ADMIN */
   if(adminAccounts[email]){
     if(!password){
-      errorMsg.innerText = "Admin ke liye password zaroori hai";
-      errorMsg.style.display = "block";
+      errorMsg.innerText="Admin ke liye password zaroori hai";
+      errorMsg.style.display="block";
       return;
     }
-
-    if(adminAccounts[email] !== password){
-      errorMsg.innerText = "Invalid admin password";
-      errorMsg.style.display = "block";
+    if(adminAccounts[email]!==password){
+      errorMsg.innerText="Invalid admin password";
+      errorMsg.style.display="block";
       return;
     }
 
     localStorage.setItem("loggedIn","yes");
     localStorage.setItem("isAdmin","yes");
-    localStorage.setItem("userEmail", email);
-
+    localStorage.setItem("userEmail",email);
     redirectAfterLogin();
     return;
   }
 
-  /* ===== GUEST LOGIN ===== */
+  /* GUEST */
   if(!email && !phone){
-    errorMsg.innerText =
-    errorMsg.style.display = "block";
+    errorMsg.innerText="Guest ke liye email ya phone zaroori hai";
+    errorMsg.style.display="block";
     return;
   }
 
   localStorage.setItem("loggedIn","yes");
   localStorage.setItem("isAdmin","no");
-  if(email) localStorage.setItem("userEmail", email);
-  if(phone) localStorage.setItem("userPhone", phone);
+  if(email) localStorage.setItem("userEmail",email);
+  if(phone) localStorage.setItem("userPhone",phone);
 
   redirectAfterLogin();
 }
 
-/* 🔥 SMART REDIRECT */
+/* 🔥 FINAL REDIRECT LOGIC */
 function redirectAfterLogin(){
-  if(localStorage.getItem("pendingPayment")){
-    window.location.href = "cart.html";
+  if(localStorage.getItem("fromCart")==="yes"){
+    window.location.href="cart.html";
   }else{
-    window.location.href = "index.html";
+    window.location.href="index.html";
   }
 }
 </script>
