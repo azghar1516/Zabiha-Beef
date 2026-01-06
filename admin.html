@@ -90,27 +90,28 @@ if(!adminEmail || !ADMINS.includes(adminEmail)){
 
 /* ================= ALL CART ITEMS ================= */
 const ITEMS = [
-  "beef-boneless",
-  "beef-chest",
-  "beef-chops",
-  "beef-mince",
-  "beef-ribs",
-  "beef-shin",
-  "beef-steak",
+  "Beef Boneless",
+  "Beef Chest",
+  "Beef Chops",
+  "Beef Mince",
+  "Beef Ribs",
+  "Beef Shins",
+  "Beef Steak",
 
-  "chicken-breast",
-  "chicken-leg",
-  "chicken-whole",
+  "Chicken Breast",
+  "Chicken Leg",
+  "Whole Chicken",
 
-  "mutton-boneless",
-  "mutton-chops",
-  "mutton-karahi",
-  "mutton-mince",
+  "Mutton Boneless",
+  "Mutton Chops",
+  "Mutton Karahi",
+  "Mutton Mince",
 
-  "veal-boneless",
-  "veal-chops",
-  "veal-mince"
+  "Veal Boneless",
+  "Veal Chops",
+  "Veal Mince"
 ];
+
 
 /* ================= RENDER ITEMS ================= */
 const container = document.getElementById("items");
@@ -120,7 +121,7 @@ ITEMS.forEach(item=>{
   div.className = "item";
 
   div.innerHTML = `
-    <label>${item.replace(/-/g," ").toUpperCase()}</label>
+    <label>${item}</label>
     <input type="number" id="price_${item}" placeholder="Enter price">
   `;
 
