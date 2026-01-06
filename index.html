@@ -1056,12 +1056,25 @@ border-radius:8px;
 
 <!-- ===== LOGIN ===== -->
 <script>
-const loggedIn=localStorage.getItem("loggedIn");
-const isAdmin=localStorage.getItem("isAdmin");
-if(loggedIn==="yes"){loginBtn.style.display="none";logoutBtn.style.display="inline-block";}
-if(isAdmin==="yes"){adminBadge.style.display="inline-block";}
-logoutBtn.onclick=()=>{localStorage.clear();location.reload();}
+const loggedIn = localStorage.getItem("loggedIn");
+const isAdmin = localStorage.getItem("isAdmin");
+
+if(loggedIn === "yes"){
+  loginBtn.style.display = "none";
+  logoutBtn.style.display = "inline-block";
+}
+
+if(isAdmin === "yes"){
+  adminBadge.style.display = "inline-block";
+}
+
+logoutBtn.onclick = () => {
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("isAdmin");
+  location.reload();
+};
 </script>
+
 
 <!-- ===== PRICE LOADER (RAW + SPECIAL) ===== -->
 <script>
