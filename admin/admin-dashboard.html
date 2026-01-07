@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | Zabiha Beef</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, Arial;
+  background:#f4f4f4;
+}
+header{
+  background:#c13600;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+}
+.logout{
+  background:#333;
+  color:#fff;
+  border:none;
+  padding:8px 14px;
+  float:right;
+  cursor:pointer;
+}
+.container{
+  max-width:900px;
+  margin:20px auto;
+  padding:15px;
+}
+.section{
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  margin-bottom:20px;
+}
+h2{
+  margin-top:0;
+  color:#c13600;
+}
+.order{
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+.order:last-child{border:none;}
+button{
+  padding:8px 12px;
+  background:#c13600;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  margin-right:6px;
+}
+.delete{
+  background:#333;
+}
+.accept{
+  background:#2e7d32;
+}
+.price-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+}
+.price-row input{
+  flex:1;
+  padding:8px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+Admin Dashboard – Zabiha Beef
+<button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+<!-- ================= ORDERS ================= -->
+<div class="section">
+<h2>📦 Customer Orders</h2>
+<div id="ordersBox">Loading...</div>
+</div>
+
+<!-- ================= PRICES ================= -->
+<div class="section">
+<h2>💰 Update Prices (Rs/kg)</h2>
+<div id="pricesBox"></div>
+<button onclick="savePrices()">Save Prices</button>
+</div>
+
+</div>
+
+<script>
+/* ===== SECURITY ===== */
+if(localStorage.getItem("isAdmin")!=="yes"){
+  window.location.href="../login.html";
+}
+
+/* ===== ALL ITEMS (FULLY SYNCED WITH INDEX.HTML) ===== */
+const PRODUCTS = [
+
+  // ===== BEEF =====
+  "Beef Steak",
+  "Beef Mince",
+  "Beef Boneless",
+  "Beef Ribs",
+  "Beef Shins",
+  "Beef Chest",
+
+  // ===== MUTTON =====
+  "Mutton Karahi",
+  "Mutton Boneless",
+  "Mutton Chops",
+  "Mutton Mince",
+
+  // ===== VEAL =====
+  "Veal Chops",
+  "Veal Mince",
+  "Veal Boneless",
+
+  // ===== CHICKEN =====
+  "Whole Chicken",
+  "Chicken Breast",
+  "Chicken Leg",
+
+  // ===== SPECIAL ITEMS =====
+  "Premium Beef Steak",
+  "Chicken Breast Fillet",
+
+  // ===== DEALS =====
+  "Beef Mince 2kg + Beef Ribs 1kg",
+  "Whole Chicken 3kg Family Pack",
+  "BBQ Beef Ribs + Chicken Wings",
+  "Mutton Chops 2kg Saver Deal",
+  "Veal Mince 2kg Value Pack"
+];
+
+/* ===== LOAD ORDERS ===== */
+function loadOrders(){
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  const box = document.getElementById("ordersBox");
+  box.innerHTML = "";
+
+  if(orders.length===0){
+    box.innerHTML="<p>No orders yet</p>";
+    return;
+  }
+
+  orders.forEach((o,i)=>{
+    const div = document.createElement("div");
+    div.className="order";
+    div.innerHTML=`
+      <b>Order #${i+1}</b><br>
+      Name: ${o.name}<br>
+      Phone: ${o.phone}<br>
+      Address: ${o.address}<br>
+      Items: ${o.items}<br>
+      Total: Rs ${o.total}<br><br>
+
+      <button class="accept" onclick="acceptOrder('${o.phone}')">Order Accepted</button>
+      <button class="delete" onclick="deleteOrder(${i})">Delete</button>
+    `;
+    box.appendChild(div);
+  });
+}
+
+/* ===== ORDER ACCEPTED (SMS) ===== */
+function acceptOrder(phone){
+  const msg="Your order has been accepted – Zabiha Beef";
+  window.location.href=`sms:${phone}?body=${encodeURIComponent(msg)}`;
+}
+
+/* ===== DELETE ORDER ===== */
+function deleteOrder(i){
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.splice(i,1);
+  localStorage.setItem("orders",JSON.stringify(orders));
+  loadOrders();
+}
+
+/* ===== LOAD PRICES ===== */
+function loadPrices(){
+  const box = document.getElementById("pricesBox");
+  PRODUCTS.forEach(p=>{
+    const price = localStorage.getItem("price_"+p)||"";
+    box.innerHTML+=`
+      <div class="price-row">
+        <input disabled value="${p}">
+        <input id="price_${p}" placeholder="Price (Rs/kg)" value="${price}">
+      </div>
+    `;
+  });
+}
+
+/* ===== SAVE PRICES ===== */
+function savePrices(){
+  PRODUCTS.forEach(p=>{
+    const val = document.getElementById("price_"+p).value;
+    if(val){
+      localStorage.setItem("price_"+p,val);
+    }
+  });
+  alert("All prices updated successfully ✅");
+}
+
+/* ===== LOGOUT ===== */
+function logout(){
+  localStorage.clear();
+  window.location.href="../login.html";
+}
+
+loadOrders();
+loadPrices();
+</script>
+
+</body>
+</html>
