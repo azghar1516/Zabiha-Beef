@@ -127,8 +127,10 @@ function login(){
 
     localStorage.setItem("loggedIn","yes");
     localStorage.setItem("isAdmin","yes");
-    localStorage.setItem("userEmail",email);
-    redirectAfterLogin();
+    localStorage.setItem("adminEmail",email);
+
+    // 🔥 DIRECT ADMIN DASHBOARD
+    window.location.href="admin/admin-dashboard.html";
     return;
   }
 
@@ -147,7 +149,7 @@ function login(){
   redirectAfterLogin();
 }
 
-/* 🔥 FINAL REDIRECT LOGIC */
+/* CUSTOMER REDIRECT (UNCHANGED) */
 function redirectAfterLogin(){
   if(localStorage.getItem("fromCart")==="yes"){
     window.location.href="cart.html";
